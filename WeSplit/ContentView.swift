@@ -12,18 +12,19 @@ import SwiftUI
 struct ContentView: View {
     // {} return something that confirm to View, and "some" means you can only return one kind of View
     var body: some View {
-        // Text view can automatically wrapped to multiple lines
-        Form{
-            Section{
-                Text("Brightness")
+        NavigationView{
+            Form{
+                Section{
+                    Text("Content")
+                }
+                
             }
-            Section{
-                Text("Accessbility")
-                Text("About")
-                Text("Battery")
-            }
-            
+            .navigationBarTitle(Text("Mountain mama"))  // create title of the form
+            .navigationBarTitle("Mountain mama")    // Same as above
+            .navigationBarTitle("Mountain mama", displayMode: .inline)  //
         }
+        // Text view can automatically wrapped to multiple lines
+        
     }
 }
 
