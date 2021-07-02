@@ -14,28 +14,14 @@ struct ContentView: View {
     var body: some View {
         // Text view can automatically wrapped to multiple lines
         Form{
-            // Swift view only handle 10 children, use Group if you need more
-            Group{
-                Text("Hello world")
-                Text("Hello world")
-                Text("Hello world")
-                Text("Hello world")
-                Text("Hello world")
+            Section{
+                Text("Brightness")
             }
-            Group{
-                Text("Hello world")
-                Text("Hello world")
-                Text("Hello world")
-                Text("Hello world")
-                Text("Hello world")
-                Text("Hello world")
-                Text("Hello world")
-                Text("Hello world")
-                Text("Hello world")
-                Text("Hello world")
+            Section{
+                Text("Accessbility")
+                Text("About")
+                Text("Battery")
             }
-            
-            
             
         }
     }
