@@ -13,8 +13,31 @@ struct ContentView: View {
     // {} return something that confirm to View, and "some" means you can only return one kind of View
     var body: some View {
         // Text view can automatically wrapped to multiple lines
-        Text("Hello, world!")
-            .padding()
+        Form{
+            // Swift view only handle 10 children, use Group if you need more
+            Group{
+                Text("Hello world")
+                Text("Hello world")
+                Text("Hello world")
+                Text("Hello world")
+                Text("Hello world")
+            }
+            Group{
+                Text("Hello world")
+                Text("Hello world")
+                Text("Hello world")
+                Text("Hello world")
+                Text("Hello world")
+                Text("Hello world")
+                Text("Hello world")
+                Text("Hello world")
+                Text("Hello world")
+                Text("Hello world")
+            }
+            
+            
+            
+        }
     }
 }
 
