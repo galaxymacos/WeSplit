@@ -7,28 +7,21 @@
 
 import SwiftUI
 
-// View is a basic protocol for anything you want to draw on screen
-// the only limitation of View is to have a body property that returns some View
+
 struct ContentView: View {
-    // {} return something that confirm to View, and "some" means you can only return one kind of View
-    var body: some View {
-        NavigationView{
-            Form{
-                Section{
-                    Text("Content")
-                }
-                
+    // @State put variable in a place where it can be changed
+    // Without it, variable in struct cannot be modified
+    //  @State is specifically designed for simple properties that are stored in one view. As a result, Apple recommends we add private access control to those properties
+    @State private var tapCount = 0
+
+        var body: some View {
+            Button("Tap Count: \(tapCount)") {
+                self.tapCount += 1
             }
-            .navigationBarTitle(Text("Mountain mama"))  // create title of the form
-            .navigationBarTitle("Mountain mama")    // Same as above
-            .navigationBarTitle("Mountain mama", displayMode: .inline)  //
         }
-        // Text view can automatically wrapped to multiple lines
-        
-    }
 }
 
-// Only affect the look but not the actual app
+
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
