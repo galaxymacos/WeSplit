@@ -9,24 +9,23 @@ import SwiftUI
 
 
 struct ContentView: View {
-    let students = ["Harry", "Hermione", "Ron"]
-    @State private var selectedStudent = 0
+    @State var checkAmount = ""
+    @State var numberOfPeople = 2
+    @State var tipSelected = 2
+    let tipAmounts = [10,15,20,25,30]
+    
     var body: some View {
-        VStack{
-            // the description will not show on screen, but it is useful for screen reader
-            Picker("Who is your fav student?", selection: $selectedStudent){
-                // 1st way to write ForEach
-                ForEach (0..<students.count) {
-                    Text(students[$0])
-                }
-                // 2nd way to write ForEach
-//                ForEach(0..<students.count){
-//                    number in
-//                    Text(students[number])
-//                }
+        Form{
+            Section{
+                TextField("Amount", text:$checkAmount)
+                    .keyboardType(.decimalPad)
+                // .keyboardType(.numberPad)
             }
-            Text("The selected student is \(students[selectedStudent])")
+            Section{
+                Text("$\(checkAmount)")
+            }
         }
+        
     }
 }
 
