@@ -15,16 +15,26 @@ struct ContentView: View {
     let tipAmounts = [10,15,20,25,30]
     
     var body: some View {
-        Form{
-            Section{
-                TextField("Amount", text:$checkAmount)
-                    .keyboardType(.decimalPad)
-                // .keyboardType(.numberPad)
+        NavigationView{
+            Form{
+                Section{
+                    TextField("Amount", text:$checkAmount)
+                        .keyboardType(.decimalPad)
+                    // .keyboardType(.numberPad)
+                    
+                    // selection = index of the selection
+                    // Picker will behave differently when you attach it to a form directly, here it chooses sliding view because it is in a form, it may choose something else in other platforms
+                    Picker("People", selection: $numberOfPeople){
+                        ForEach(2..<100){
+                            Text("\($0) people")
+                        }
+                    }
+                }
+                
             }
-            Section{
-                Text("$\(checkAmount)")
-            }
+            .navigationBarTitle("We Split")
         }
+        
         
     }
 }
