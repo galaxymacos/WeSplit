@@ -9,14 +9,12 @@ import SwiftUI
 
 
 struct ContentView: View {
-    // @State put variable in a place where it can be changed
-    // Without it, variable in struct cannot be modified
-    //  @State is specifically designed for simple properties that are stored in one view. As a result, Apple recommends we add private access control to those properties
-    @State private var tapCount = 0
-
+        @State var name: String = ""
         var body: some View {
-            Button("Tap Count: \(tapCount)") {
-                self.tapCount += 1
+            Form{
+                // $ = it should read the value of the property but also write it back as any changes happen.
+                TextField("TextField", text: $name)
+                Text("Your name is \(name)")
             }
         }
 }
