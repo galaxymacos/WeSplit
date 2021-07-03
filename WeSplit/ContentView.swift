@@ -9,9 +9,18 @@ import SwiftUI
 
 
 struct ContentView: View {
-    @State var checkAmount = ""
-    @State var numberOfPeople = 0
-    @State var tipSelected = 0
+    @State var checkAmountS = ""
+    @State var numOfPeopleIndex = 0
+    @State var tipSelectionIndex = 0
+    var totalPerPerson:Double {
+        
+        let checkAmount:Double = (Double)(checkAmountS) ?? 0
+        let numOfPeople:Double = (Double)(numOfPeopleIndex + 2)
+        let tip = (Double)(tipAmounts[tipSelectionIndex])/100 * checkAmount
+        return (checkAmount + tip)/numOfPeople
+    }
+    
+    
     let tipAmounts = [10,15,20,25,30]
     
     var body: some View {
@@ -19,12 +28,12 @@ struct ContentView: View {
             Form{
                 Section{
                 
-                    TextField("Amount", text:$checkAmount)
+                    TextField("Amount", text:$checkAmountS)
                         .keyboardType(.decimalPad)
                 }
                 
                 Section(header: Text("How much tip do you want to leave")){
-                    Picker("Tip percentage", selection: $tipSelected){
+                    Picker("Tip percentage", selection: $tipSelectionIndex){
                         ForEach(0..<tipAmounts.count){
                             Text("\(tipAmounts[$0])%")
                         }
@@ -35,11 +44,14 @@ struct ContentView: View {
                 }.textCase(nil)
                 
                 Section{
-                    Picker("People", selection: $numberOfPeople){
+                    Picker("People", selection: $numOfPeopleIndex){
                         ForEach(2..<100){
                             Text("\($0) people")
                         }
                     }
+                }
+                Section{
+                    Text("Total per person: $\(totalPerPerson)")
                 }
                 
             }
