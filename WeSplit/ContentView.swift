@@ -10,14 +10,24 @@ import SwiftUI
 
 struct ContentView: View {
     @State var checkAmountS = ""
-    @State var numOfPeopleIndex = 0
+    @State var numOfPeopleS = "2"
     @State var tipSelectionIndex = 0
+    
+    var totalAmountOfCheck:Double{
+        let checkAmount:Double = (Double)(checkAmountS) ?? 0
+        let tip = (Double)(tipAmounts[tipSelectionIndex])/100 * checkAmount
+        return checkAmount + tip
+    }
+    
     var totalPerPerson:Double {
         
         let checkAmount:Double = (Double)(checkAmountS) ?? 0
-        let numOfPeople:Double = (Double)(numOfPeopleIndex + 2)
+        let numOfPeople: Int = (Int)(numOfPeopleS) ?? 1
+        if numOfPeople<1 {
+            return 0
+        }
         let tip = (Double)(tipAmounts[tipSelectionIndex])/100 * checkAmount
-        return (checkAmount + tip)/numOfPeople
+        return (checkAmount + tip)/(Double)(numOfPeople)
     }
     
     
@@ -43,16 +53,24 @@ struct ContentView: View {
                 // textCase(nil) allows us to keep the original letter case, else the header will be uppercase by default
                 }.textCase(nil)
                 
-                Section{
-                    Picker("People", selection: $numOfPeopleIndex){
-                        ForEach(2..<100){
-                            Text("\($0) people")
-                        }
-                    }
+                Section(header: Text("Number of people")){
+//                    Picker("People", selection: $numOfPeopleIndex){
+//                        ForEach(2..<100){
+//                            Text("\($0) people")
+//                        }
+//                    }
+                    TextField("2", text:$numOfPeopleS)
                 }
-                Section{
-                    Text("Total per person: $\(totalPerPerson)")
+                
+                Section(header:Text("Total amount of check: ")){
+                    Text("\(totalAmountOfCheck)")
                 }
+                
+                Section(header:Text("Amount per person")){
+                    // specifier: Round the number to 2 decimal points
+                    // %.g will remove insignificant trailing zero, %.f won't
+                    Text("Total per person: $\(totalPerPerson, specifier: "%.2g")")
+                }.textCase(nil)
                 
             }
             .navigationBarTitle("We Split")
